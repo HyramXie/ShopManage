@@ -3,7 +3,7 @@ package com.shop.bean;
 public class User {
     private int userID;
     private String username;
-    private String passwordHash;
+    private String password;
     private String email;
     private String phoneNumber;
     
@@ -11,10 +11,14 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
     
-    public User(int userID, String username, String passwordHash, String email, String phoneNumber) {
-		this.userID = userID;
+    public User(String username, String password) {
 		this.username = username;
-		this.passwordHash = passwordHash;
+		this.password = password;
+	}
+    
+    public User(String username, String password, String email, String phoneNumber) {
+		this.username = username;
+		this.password = password;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 	}
@@ -35,10 +39,10 @@ public class User {
 	}
 	
 	public String getPassword() {
-		return passwordHash;
+		return password;
 	}
 	public void setPassword(String passwordHash) {
-		this.passwordHash = passwordHash;
+		this.password = passwordHash;
 	}
 	
 	public String getEmail() {

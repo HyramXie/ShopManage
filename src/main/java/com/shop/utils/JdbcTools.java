@@ -8,7 +8,7 @@ public class JdbcTools {
 
 	public static Connection getConnection() throws Exception {
 		String driverClass = "com.mysql.cj.jdbc.Driver";
-		String jdbcUrl = "jdbc:mysql://localhost:3306/demo";
+		String jdbcUrl = "jdbc:mysql://localhost:3306/shop";
 		String user = "root";
 		String password = "mysql";
 		Class.forName(driverClass);

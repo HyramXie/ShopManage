@@ -14,36 +14,22 @@ public class UserDaoJdbcImpl extends DaoJdbcImpl<User> implements UserDao{
 	}
 	@Override
 	public void addUser(Connection connection, User user) throws SQLException {
-		String sql = "INSERT INTO `user` (name, password) VALUES (?, ?);";
-		Object[] objects = {user.getUsername(), user.getPassword()};
-		update(connection, sql, objects);
-	}
-
-	@Override
-	public void deleteUser(Connection connection, String name) throws SQLException {
-		String sql = "DELETE FROM user WHERE name = ?;";
-		Object[] objects = {name};
+		String sql = "INSERT INTO user (Username, Password, Email, PhoneNumber) VALUES (?, ?, ?, ?);";
+		Object[] objects = {user.getUsername(), user.getPassword(), user.getEmail(), user.getPhoneNumber()};
 		update(connection, sql, objects);
 	}
 
 	@Override
 	public void updateUser(Connection connection, User user) throws SQLException {
-		String sql = "UPDATE user SET password = ?	WHERE name = ?;";
-		Object[] objects = { user.getPassword(), user.getUsername()};
+		String sql = "UPDATE user SET Username = ?,  Password = ?, Email = ?, PhoneNumber = ?	WHERE UserID = ?;";
+		Object[] objects = { user.getUsername(),user.getPassword(), user.getEmail(), user.getPhoneNumber(), user.getUserID()};
 		update(connection, sql, objects);
 	}
 
 	@Override
 	public User searchUser(Connection connection, User user) throws SQLException {
-		String sql = "SELECT * FROM user WHERE name = ? AND password = ?;";
+		String sql = "SELECT * FROM user WHERE Username = ? AND Password = ?;";
 		Object[] objects = {user.getUsername(), user.getPassword()};
 		return fetch(connection, sql, objects);
 	}
-
-	@Override
-	public List<User> fetchAllUser(Connection connection) throws SQLException {
-		String sql = "SELECT * FROM `user`";
-		return fetchList(connection, sql);
-	}
-
 }
