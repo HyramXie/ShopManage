@@ -1,15 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Home Page</title>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
-	<a href="${pageContext.request.contextPath}/editUser.jsp">Edit Information</a><br>
-	<a href="${pageContext.request.contextPath}/pruduct.jsp">Shop Product</a><br>
-	<a href="${pageContext.request.contextPath}/shopcart.jsp">ShopCart</a><br>
-	<a href="${pageContext.request.contextPath}/order.jsp">Order</a><br>
+    <div class="container">
+        <h1>Welcome to Our Shop</h1>
+        <div class="links">
+            <a href="${pageContext.request.contextPath}/EditUser.jsp">Edit Information</a>
+            <a href="${pageContext.request.contextPath}/Product.jsp">Shop Products</a>
+            <a href="${pageContext.request.contextPath}/ShopCart.jsp">Shopping Cart</a>
+            <a href="${pageContext.request.contextPath}/Order.jsp">Order</a>
+        </div>
+    </div>
 </body>
 </html>

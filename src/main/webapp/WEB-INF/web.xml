@@ -9,14 +9,13 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-	<filter>
-   		<filter-name>loginFilter</filter-name>
-    	<filter-class>com.shop.filter.LoginFilter</filter-class>
-	</filter>
-	<filter-mapping>
-    	<filter-name>loginFilter</filter-name>
-    	<url-pattern>/home.jsp</url-pattern>
-    	<url-pattern>/editUser.jsp</url-pattern>
-	</filter-mapping>
- 
+   <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>com.shop.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/home.jsp</url-pattern>
+    <url-pattern>/editUser.jsp</url-pattern>
+  </filter-mapping>
 </web-app>

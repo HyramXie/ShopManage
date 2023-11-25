@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.Session;
 import com.shop.bean.User;
 import com.shop.service.UserService;
 
@@ -54,7 +53,7 @@ public class UserServlet extends HttpServlet {
 		if (result != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", result);
-			response.sendRedirect(request.getContextPath()+"/home.jsp");
+			response.sendRedirect(request.getContextPath()+"/Home.jsp");
 		}
 		else {
 			out.print("<script> alert('登录失败，用户名不存在！请先注册！'); </script>");
@@ -73,13 +72,13 @@ public class UserServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		User user = new User(name, password, email, phone);
 		User result = service.checkUser(user);
-		if (result != null) {
+		if (result == null) {
 			service.registUser(user);
-			response.sendRedirect(request.getContextPath()+"/userlogin.jsp");
+			response.sendRedirect(request.getContextPath()+"/UserLogin.jsp");
 		}
 		else {
 			out.print("<script> alert('用户已存在'); </script>");
-			response.sendRedirect(request.getContextPath()+"/register.jsp");
+			response.sendRedirect(request.getContextPath()+"/Register.jsp");
 		}
 	}
 	
@@ -97,6 +96,7 @@ public class UserServlet extends HttpServlet {
  		System.out.println(user1.getUserID());
  		service.changeUser(user);
  		session.setAttribute("user", user);
- 		response.sendRedirect(request.getContextPath()+"/home.jsp");
+ 		response.sendRedirect(request.getContextPath()+"/Home.jsp");
 	}
+	
 }

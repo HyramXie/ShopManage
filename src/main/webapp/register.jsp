@@ -1,18 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="./css/Page.css">
 </head>
 <body>
-	<form action="regist.user" method="post">
-		Uesrname:<input type="text" name="username"><br>
-		Password:<input type="text" name="password"><br>
-		PhoneNumber:<input type="text" name="phone"><br>
-		Email:<input type="text" name="email"><br>
-		<input type="submit" value="Submit">
-	</form>
+    <div class="container">
+   		 <h1>Register</h1>
+        <form action="regist.user" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br>
+            <label for="phone">PhoneNumber:</label>
+            <input type="text" id="phone" name="phone"><br>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
 </html>

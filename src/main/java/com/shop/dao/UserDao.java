@@ -2,7 +2,6 @@ package com.shop.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 import com.shop.bean.User;
 

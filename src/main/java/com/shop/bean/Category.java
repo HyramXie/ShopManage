@@ -8,6 +8,10 @@ public class Category {
 		// TODO Auto-generated constructor stub
 	}
     
+    public Category(String categoryName) {
+		this.categoryName = categoryName;
+	}
+    
 	public Category(int categoryID, String categoryName) {
 		this.categoryID = categoryID;
 		this.categoryName = categoryName;

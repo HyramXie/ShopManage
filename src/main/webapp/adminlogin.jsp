@@ -1,17 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./css/Page.css">
 </head>
 <body>
-	<form action="login.do" method="post">
-		Uesrname:<input type="text" name="username"><br>
-		Password:<input type="text" name="password"><br>
-		<input type="submit" value="Submit">
-	</form>
-
+    <div class="container">
+    	<h1>Admin Login</h1>
+        <form action="AdminLogin" method="post">
+            <label for="adminname">Username:</label>
+            <input type="text" id="adminname" name="adminname"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
 </html>

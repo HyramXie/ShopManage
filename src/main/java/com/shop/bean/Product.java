@@ -11,7 +11,15 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
     
-    public Product(int productID, String productName, double price, int stockQuantity, int categoryID) {
+    public Product(String productName, double price, int stockQuantity, int categoryID) {
+		super();
+		this.productName = productName;
+		this.price = price;
+		this.stockQuantity = stockQuantity;
+		this.categoryID = categoryID;
+	}
+
+	public Product(int productID, String productName, double price, int stockQuantity, int categoryID) {
 		this.productID = productID;
 		this.productName = productName;
 		this.price = price;

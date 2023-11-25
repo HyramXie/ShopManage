@@ -1,50 +1,40 @@
 package com.shop.service;
 
 import java.sql.Connection;
+import java.util.List;
 
-import com.shop.bean.User;
-import com.shop.dao.UserDao;
-import com.shop.daoImpl.UserDaoJdbcImpl;
+import com.shop.bean.Product;
+import com.shop.dao.ProductDao;
+import com.shop.daoImpl.ProductDaoJdbcImpl;
 import com.shop.utils.JdbcTools;
 
-public class UserService {
-	private UserDao dao;
+public class ProductService {
+	private ProductDao dao;
 	
-	public UserService() {
-		this.dao = new UserDaoJdbcImpl();
+	public ProductService() {
+		this.dao = new ProductDaoJdbcImpl();
 	}
 	
-	public User checkUser(User user){
+	public boolean checkCategory(Product product){
 		Connection connection = null;
-		User user1 = null;
+		boolean result = false;
 		try {
 			connection = JdbcTools.getConnection();
-			user1 = dao.searchUser(connection, user);
+			if(dao.searchProduct(connection, product) != null)
+				result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			JdbcTools.releaseResource(null, connection);
 		}
-		return user1;
+		return result;
 	}
 	
-	public void registUser(User user){
+	public void addCategory(Product product){
 		Connection connection = null;
 		try {
 			connection = JdbcTools.getConnection();
-			dao.addUser(connection, user);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			JdbcTools.releaseResource(null, connection);
-		}
-	}
-	
-	public void changeUser(User user){
-		Connection connection = null;
-		try {
-			connection = JdbcTools.getConnection();
-			dao.updateUser(connection, user);
+			dao.addProduct(connection, product);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -52,4 +42,17 @@ public class UserService {
 		}
 	}
 	
+	public List<Product> getCategoryList(){
+		Connection connection = null;
+		List<Product> products = null;
+		try {
+			connection = JdbcTools.getConnection();
+			products = dao.fetchAllProduct(connection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
+		return products;
+	}
 }

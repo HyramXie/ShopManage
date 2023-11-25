@@ -1,38 +1,40 @@
 package com.shop.service;
 
 import java.sql.Connection;
+import java.util.List;
 
-import com.shop.bean.User;
-import com.shop.dao.UserDao;
-import com.shop.daoImpl.UserDaoJdbcImpl;
+import com.shop.bean.Category;
+import com.shop.dao.CategoryDao;
+import com.shop.daoImpl.CategoryDaoJdbcImpl;
 import com.shop.utils.JdbcTools;
 
-public class UserService {
-	private UserDao dao;
+public class CategoryService {
+	private CategoryDao dao;
 	
-	public UserService() {
-		this.dao = new UserDaoJdbcImpl();
+	public CategoryService() {
+		this.dao = new CategoryDaoJdbcImpl();
 	}
 	
-	public User checkUser(User user){
+	public boolean checkCategory(Category category){
 		Connection connection = null;
-		User user1 = null;
+		boolean result = false;
 		try {
 			connection = JdbcTools.getConnection();
-			user1 = dao.searchUser(connection, user);
+			if(dao.searchCategory(connection, category) != null)
+				result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			JdbcTools.releaseResource(null, connection);
 		}
-		return user1;
+		return result;
 	}
 	
-	public void registUser(User user){
+	public void addCategory(Category category){
 		Connection connection = null;
 		try {
 			connection = JdbcTools.getConnection();
-			dao.addUser(connection, user);
+			dao.addCategory(connection, category);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -40,16 +42,18 @@ public class UserService {
 		}
 	}
 	
-	public void changeUser(User user){
+	public List<Category> getCategoryList(){
 		Connection connection = null;
+		List<Category> categories = null;
 		try {
 			connection = JdbcTools.getConnection();
-			dao.updateUser(connection, user);
+			categories = dao.fetchAllCategory(connection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			JdbcTools.releaseResource(null, connection);
 		}
+		return categories;
 	}
 	
 }
