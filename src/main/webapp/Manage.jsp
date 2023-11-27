@@ -10,10 +10,10 @@
     <div class="container">
         <h1>Manage</h1>
         <div class="links">
-			<a href="${pageContext.request.contextPath}/AddCategory">Add Category</a>
-            <a href="${pageContext.request.contextPath}/GetCategory">Add Product</a>
-            <a href="${pageContext.request.contextPath}/ModifyCategory.jsp">Modify Category</a>
-            <a href="${pageContext.request.contextPath}/ModifyProduct.jsp">Modify Product</a>
+			<a href="${pageContext.request.contextPath}/AddCategory.jsp">Add Category</a>
+            <a href="${pageContext.request.contextPath}/GetSelect">Add Product</a>
+            <a href="${pageContext.request.contextPath}/GetCategory">Modify Category</a>
+            <a href="${pageContext.request.contextPath}/GetProduct">Modify Product</a>
             <a href="${pageContext.request.contextPath}/OrderDeal.jsp">Order Deal</a>
         </div>
     </div>

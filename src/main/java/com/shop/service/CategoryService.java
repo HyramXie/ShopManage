@@ -30,6 +30,20 @@ public class CategoryService {
 		return result;
 	}
 	
+	public Category checkCategory(int id){
+		Connection connection = null;
+		Category result = null;
+		try {
+			connection = JdbcTools.getConnection();
+			result = dao.searchCategory(connection, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
+		return result;
+	}
+	
 	public void addCategory(Category category){
 		Connection connection = null;
 		try {
@@ -54,6 +68,30 @@ public class CategoryService {
 			JdbcTools.releaseResource(null, connection);
 		}
 		return categories;
+	}
+	
+	public void deleteCategory(int id){
+		Connection connection = null;
+		try {
+			connection = JdbcTools.getConnection();
+			dao.deleteCategory(connection, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
+	}
+	
+	public void updateCategory(Category category){
+		Connection connection = null;
+		try {
+			connection = JdbcTools.getConnection();
+			dao.updateCategory(connection, category);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
 	}
 	
 }

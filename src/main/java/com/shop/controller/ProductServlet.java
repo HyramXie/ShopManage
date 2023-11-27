@@ -17,7 +17,7 @@ import com.shop.bean.Category;
 import com.shop.service.CategoryService;
 import com.shop.service.ProductService;
 
-@WebServlet(urlPatterns={"/ProductServlet", "/GetCategory", "/AddProduct"})
+@WebServlet(urlPatterns={"/ProductServlet", "/GetSelect", "/AddProduct", "/GetProduct", "/DeleteProduct", "/SearchProduct", "/UpdateProduct", "/ChangeStatus"})
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,11 +40,8 @@ public class ProductServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	public void GetCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		CategoryService service = new CategoryService();
-		List<Category> categories = service.getCategoryList();
-		HttpSession session = request.getSession();
-		session.setAttribute("categories", categories);
+	public void GetSelect(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		CategoryList(request, response);
 		response.sendRedirect(request.getContextPath()+"/AddProduct.jsp");
 	}
 	
@@ -66,10 +63,67 @@ public class ProductServlet extends HttpServlet {
 		    categoryId = Integer.parseInt(categoryIdStr);
 		
 		Product product = new Product(name, price, stock, categoryId);
-		if (!service.checkCategory(product)) {
-			service.addCategory(product);
+		if (service.checkProduct(product) == null) {
+			service.addProduct(product);
 		}
 		response.sendRedirect(request.getContextPath()+"/AddProduct.jsp");
 
 	}
+	
+	public void GetProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("products") == null || request.getParameter("change") != null) {
+			ProductService service = new ProductService();
+			List<Product> products = service.getProductList();
+			session.setAttribute("products", products);
+		}
+		response.sendRedirect(request.getContextPath()+"/ModifyProduct.jsp");
+
+	}
+	
+	public void DeleteProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ProductService service = new ProductService();
+		int id = Integer.parseInt(request.getParameter("id"));
+		service.deleteProduct(id);
+		response.sendRedirect(request.getContextPath()+"/GetProduct?change=1");
+	}
+	
+	public void UpdateProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ProductService service = new ProductService();
+		String name = request.getParameter("name");
+		int id = Integer.parseInt(request.getParameter("id"));
+		double price = Double.parseDouble(request.getParameter("price"));
+		int stock = Integer.parseInt(request.getParameter("stock"));
+		int categoryid = Integer.parseInt(request.getParameter("categoryid"));
+		
+		Product product = new Product(id, name, price, stock, categoryid);
+		service.updateProduct(product);
+		response.sendRedirect(request.getContextPath()+"/GetProduct?change=1");
+	}
+	
+	public void SearchProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		CategoryList(request, response);
+		ProductService service = new ProductService();
+		int id = Integer.parseInt(request.getParameter("id"));
+		Product product = service.checkProduct(id);
+		request.setAttribute("product", product);
+		request.getRequestDispatcher("/UpdateProduct.jsp").forward(request, response);
+	}
+	
+	public void CategoryList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		if (session.getAttribute("categories") == null) {
+			CategoryService service = new CategoryService();
+			List<Category> categories = service.getCategoryList();
+			session.setAttribute("categories", categories);
+		}
+	}
+	
+	public void ChangeStatus(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ProductService service = new ProductService();
+		int id = Integer.parseInt(request.getParameter("id"));
+		service.updateProduct(id);
+		response.sendRedirect(request.getContextPath()+"/GetProduct?change=1");
+	}
+	
 }

@@ -21,23 +21,29 @@ public class CategoryDaoJdbcImpl extends DaoJdbcImpl<Category> implements Catego
 		
 	}
 	@Override
-	public void deleteCategory(Connection connection, String name) throws SQLException {
-//		String sql = "DELETE FROM user WHERE name = ?;";
-//		Object[] objects = {name};
-//		update(connection, sql, objects);
+	public void deleteCategory(Connection connection, int id) throws SQLException {
+		String sql = "DELETE FROM category WHERE CategoryID=?;";
+		Object[] objects = {id};
+		update(connection, sql, objects);
 		
 	}
 	@Override
 	public void updateCategory(Connection connection, Category category) throws SQLException {
-//		String sql = "UPDATE user SET password = ?	WHERE name = ?;";
-//		Object[] objects = { user.getPassword(), user.getUsername()};
-//		update(connection, sql, objects);
+		String sql = "UPDATE category SET  CategoryName = ? WHERE CategoryID=?;";
+		Object[] objects = { category.getCategoryName(), category.getCategoryID()};
+		update(connection, sql, objects);
 		
 	}
 	@Override
 	public Category searchCategory(Connection connection, Category category) throws SQLException {
 		String sql = "SELECT * FROM category WHERE CategoryName = ?;";
 		Object[] objects = {category.getCategoryName()};
+		return fetch(connection, sql, objects);
+	}
+	@Override
+	public Category searchCategory(Connection connection, int id) throws SQLException {
+		String sql = "SELECT * FROM category WHERE CategoryID = ?;";
+		Object[] objects = {id};
 		return fetch(connection, sql, objects);
 	}
 	@Override

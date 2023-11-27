@@ -9,14 +9,13 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet Filter implementation class LoginFilter
- */
+
 @WebFilter("/LoginFilter")
 public class LoginFilter extends HttpFilter implements Filter {
        
@@ -43,6 +42,14 @@ public class LoginFilter extends HttpFilter implements Filter {
 	}
 	private boolean userIsLoggedIn(ServletRequest request) {
 		HttpSession session = ((HttpServletRequest)request).getSession();
+		
+//		Cookie[] cookies = ((HttpServletRequest)request).getCookies();
+//		if( cookies != null && cookies.length > 0) 
+//			for (Cookie cookie:cookies) {
+//				String name = cookie.getName();
+//				String value = cookie.getValue();
+//			}
+		
 		if(session == null || session.getAttribute("user") == null)	
 			return false;
 		else 

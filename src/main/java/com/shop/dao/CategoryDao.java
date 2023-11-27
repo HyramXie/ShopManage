@@ -9,11 +9,13 @@ import com.shop.bean.Category;
 public interface CategoryDao {
 	public void addCategory(Connection connection, Category category) throws SQLException;
 
-	public void deleteCategory(Connection connection, String name) throws SQLException;
+	public void deleteCategory(Connection connection, int id) throws SQLException;
 	
 	public void updateCategory(Connection connection, Category category) throws SQLException;
 
 	public Category searchCategory(Connection connection, Category category) throws SQLException;
+	
+	public Category searchCategory(Connection connection, int id) throws SQLException;
 	
 	public List<Category> fetchAllCategory(Connection connection) throws SQLException;
 

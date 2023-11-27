@@ -11,11 +11,11 @@
     <div class="container">
         <h1>Add Product</h1>
         <form action="AddProduct" method="post">
-            <label for="name">Productname:</label>
+            <label for="name">Product:</label>
             <input type="text" id="name" name="name"><br>
             <label for="price">Price:</label>
             <input type="text" id="price" name="price"><br>
-            <label for="stock">StockQuantity:</label>
+            <label for="stock">Stock:</label>
             <input type="text" id="stock" name="stock" ><br>
             <label for="categoryid">Category:</label>
             <select name="categoryid" class="selector">

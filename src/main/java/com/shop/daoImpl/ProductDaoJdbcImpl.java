@@ -19,31 +19,53 @@ public class ProductDaoJdbcImpl extends DaoJdbcImpl<Product> implements ProductD
 	}
 
 	@Override
-	public void deleteProduct(Connection connection, String name) throws SQLException {
-//		String sql = "DELETE FROM user WHERE name = ?;";
-//		Object[] objects = {name};
-//		update(connection, sql, objects);
+	public void deleteProduct(Connection connection, int id) throws SQLException {
+		String sql = "DELETE FROM product WHERE ProductID=?;";
+		Object[] objects = {id};
+		update(connection, sql, objects);
 		
 	}
 
 	@Override
 	public void updateProduct(Connection connection, Product product) throws SQLException {
-//		String sql = "UPDATE user SET password = ?	WHERE name = ?;";
-//		Object[] objects = { user.getPassword(), user.getUsername()};
-//		update(connection, sql, objects);
+		String sql = "UPDATE product SET ProductName=?, Price=?, StockQuantity=?, CategoryID=? WHERE ProductID=?;";
+		Object[] objects = { product.getProductName(), product.getPrice(), product.getStockQuantity(), product.getCategoryID(), product.getProductID()};
+		update(connection, sql, objects);
+		
+	}
+	
+	@Override
+	public void updateProduct(Connection connection, int id) throws SQLException {
+		String sql = "UPDATE product \r\n"
+				+ "SET `Status` = CASE \r\n"
+				+ "    WHEN `Status` = 1 THEN 0 \r\n"
+				+ "    ELSE 1 \r\n"
+				+ "END \r\n"
+				+ "WHERE ProductID = ?;";
+		Object[] objects = {id};
+		update(connection, sql, objects);
 		
 	}
 
 	@Override
 	public Product searchProduct(Connection connection, Product product) throws SQLException {
-		String sql = "SELECT * FROM category WHERE ProductName = ?;";
+		String sql = "SELECT * FROM product WHERE ProductName = ?;";
 		Object[] objects = {product.getProductName()};
+		return fetch(connection, sql, objects);
+	}
+	
+	@Override
+	public Product searchProduct(Connection connection, int id) throws SQLException {
+		String sql = "SELECT * FROM product WHERE ProductID=?;";
+		Object[] objects = {id};
 		return fetch(connection, sql, objects);
 	}
 
 	@Override
 	public List<Product> fetchAllProduct(Connection connection) throws SQLException {
-		String sql = "SELECT * FROM product";
+		String sql = "SELECT p.ProductID, p.ProductName, p.Price, p.StockQuantity, p.CategoryID, c.CategoryName, p.Status\r\n"
+				+ "FROM product p\r\n"
+				+ "JOIN category c ON p.CategoryID = c.CategoryID;";
 		return fetchList(connection, sql);
 	}
 

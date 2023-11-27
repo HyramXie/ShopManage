@@ -15,13 +15,12 @@ public class ProductService {
 		this.dao = new ProductDaoJdbcImpl();
 	}
 	
-	public boolean checkCategory(Product product){
+	public Product checkProduct(Product product){
 		Connection connection = null;
-		boolean result = false;
+		Product result = null;
 		try {
 			connection = JdbcTools.getConnection();
-			if(dao.searchProduct(connection, product) != null)
-				result = true;
+			result = dao.searchProduct(connection, product);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -30,7 +29,21 @@ public class ProductService {
 		return result;
 	}
 	
-	public void addCategory(Product product){
+	public Product checkProduct(int id){
+		Connection connection = null;
+		Product result = null;
+		try {
+			connection = JdbcTools.getConnection();
+			result = dao.searchProduct(connection, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
+		return result;
+	}
+	
+	public void addProduct(Product product){
 		Connection connection = null;
 		try {
 			connection = JdbcTools.getConnection();
@@ -42,7 +55,7 @@ public class ProductService {
 		}
 	}
 	
-	public List<Product> getCategoryList(){
+	public List<Product> getProductList(){
 		Connection connection = null;
 		List<Product> products = null;
 		try {
@@ -55,4 +68,41 @@ public class ProductService {
 		}
 		return products;
 	}
+	
+	public void deleteProduct(int id){
+		Connection connection = null;
+		try {
+			connection = JdbcTools.getConnection();
+			dao.deleteProduct(connection, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
+	}
+	
+	public void updateProduct(Product product){
+		Connection connection = null;
+		try {
+			connection = JdbcTools.getConnection();
+			dao.updateProduct(connection, product);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
+	}
+	
+	public void updateProduct(int id){
+		Connection connection = null;
+		try {
+			connection = JdbcTools.getConnection();
+			dao.updateProduct(connection, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
+	}
+	
 }
