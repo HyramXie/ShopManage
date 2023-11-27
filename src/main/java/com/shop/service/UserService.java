@@ -16,16 +16,16 @@ public class UserService {
 	
 	public User checkUser(User user){
 		Connection connection = null;
-		User user1 = null;
+		User result = null;
 		try {
 			connection = JdbcTools.getConnection();
-			user1 = dao.searchUser(connection, user);
+			result = dao.searchUser(connection, user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			JdbcTools.releaseResource(null, connection);
 		}
-		return user1;
+		return result;
 	}
 	
 	public void registUser(User user){

@@ -53,6 +53,11 @@ public class UserServlet extends HttpServlet {
 		if (result != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", result);
+			
+//			Cookie cookie = new Cookie("username", result.getUsername());
+//			cookie.setMaxAge(60 * 60);
+//			response.addCookie(cookie);
+			
 			response.sendRedirect(request.getContextPath()+"/Home.jsp");
 		}
 		else {
