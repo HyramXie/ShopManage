@@ -29,7 +29,6 @@ public class CategoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String servletPath = request.getServletPath();
 		String methodName =  servletPath.substring(1, servletPath.length());
-		System.out.println(methodName);
 		try {
 			Method method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class,HttpServletResponse.class);
 			method.invoke(this, request, response);

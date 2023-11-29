@@ -14,7 +14,6 @@
             <input type="text" id="name" name="name"><br>
         	<input type="submit" value="Submit">
         </form>
-       
     </div>
 </body>
 </html>

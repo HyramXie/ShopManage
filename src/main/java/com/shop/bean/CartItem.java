@@ -2,17 +2,18 @@ package com.shop.bean;
 
 public class CartItem {
     private int cartItemID;
-    private int cartID;
+    private int userID;
     private int productID;
     private int quantity;
+    private double price;
+    private String productName;
     
     public CartItem() {
 		// TODO Auto-generated constructor stub
 	}
     
-	public CartItem(int cartItemID, int cartID, int productID, int quantity) {
-		this.cartItemID = cartItemID;
-		this.cartID = cartID;
+	public CartItem(int userID, int productID, int quantity) {
+		this.userID = userID;
 		this.productID = productID;
 		this.quantity = quantity;
 	}
@@ -22,11 +23,11 @@ public class CartItem {
 	public void setCartItemID(int cartItemID) {
 		this.cartItemID = cartItemID;
 	}
-	public int getCartID() {
-		return cartID;
+	public int getUserID() {
+		return userID;
 	}
-	public void setCartID(int cartID) {
-		this.cartID = cartID;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	public int getProductID() {
 		return productID;
@@ -39,6 +40,22 @@ public class CartItem {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
     

@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>Product</title>
     <link rel="stylesheet" href="./css/Modify.css">
 </head>
 <body>
@@ -15,24 +15,20 @@
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Category</th>
+                <th>Buy</th>
             </tr>
         </thead>
         <tbody>
         	<c:forEach items="${sessionScope.products}" var="p" >
+        		<c:if test="${p.getStatus() == 1}">
         		<tr>
                 	<td>${p.getProductName()}</td>
                 	<td>${p.getPrice()}</td>
                 	<td>${p.getStockQuantity()}</td>
                 	<td>${p.getCategoryName()}</td>
-                	<%-- <td><a href="${pageContext.request.contextPath}/ChangeStatus?id=${p.getProductID()}">
-                		<c:choose>
-                			<c:when test="${p.getStatus() == 1}">Down</c:when>
-                			<c:otherwise>Up</c:otherwise>
-                		</c:choose>
-                	</a></td>
-                	<td><a href="${pageContext.request.contextPath}/SearchProduct?id=${p.getProductID()}">Update</a></td>
-                	<td><a href="${pageContext.request.contextPath}/DeleteProduct?id=${p.getProductID()}">Delete</a></td> --%>
+                	<td><a href="${pageContext.request.contextPath}/SearchProduct?id=${p.getProductID()}&buy=1">Add</a></td>
            		</tr>
+           		</c:if>
             </c:forEach>
         </tbody>
     </table>

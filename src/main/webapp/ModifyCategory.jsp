@@ -4,8 +4,16 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>ModifyCategory</title>
     <link rel="stylesheet" href="./css/Modify.css">
+    <script type="text/javascript">
+    if(window.name != "noReload"){
+        window.name = "noReload";
+        location.reload();
+    } else {
+        window.name = "";
+    }
+    </script>
 </head>
 <body>
     <table>

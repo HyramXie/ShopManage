@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Update Category</title>
     <link rel="stylesheet" href="./css/editUser.css">
+
 </head>
 <body>
     <div class="container">

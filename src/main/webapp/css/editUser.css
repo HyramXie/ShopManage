@@ -77,3 +77,7 @@ option {
             background-color: rgb(255, 0, 0); /* 悬停时的背景色 */
 }
 
+p{
+	text-align: center;
+}
+

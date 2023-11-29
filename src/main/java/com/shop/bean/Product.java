@@ -30,6 +30,15 @@ public class Product {
 		this.categoryID = categoryID;
 	}
 
+	public Product(int productID, String productName, double price, int stockQuantity, String categoryName) {
+		super();
+		this.productID = productID;
+		this.productName = productName;
+		this.price = price;
+		this.stockQuantity = stockQuantity;
+		this.categoryName = categoryName;
+	}
+
 	public int getProductID() {
 		return productID;
 	}

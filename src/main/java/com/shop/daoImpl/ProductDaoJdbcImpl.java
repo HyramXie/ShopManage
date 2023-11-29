@@ -56,7 +56,9 @@ public class ProductDaoJdbcImpl extends DaoJdbcImpl<Product> implements ProductD
 	
 	@Override
 	public Product searchProduct(Connection connection, int id) throws SQLException {
-		String sql = "SELECT * FROM product WHERE ProductID=?;";
+		String sql = "SELECT p.ProductName, p.Price, p.StockQuantity, p.CategoryID, c.CategoryName\r\n"
+				+ "FROM product p JOIN category c ON p.CategoryID = c.CategoryID\r\n"
+				+ "WHERE p.ProductID = ?";
 		Object[] objects = {id};
 		return fetch(connection, sql, objects);
 	}

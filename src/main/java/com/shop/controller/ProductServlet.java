@@ -77,8 +77,10 @@ public class ProductServlet extends HttpServlet {
 			List<Product> products = service.getProductList();
 			session.setAttribute("products", products);
 		}
-		response.sendRedirect(request.getContextPath()+"/ModifyProduct.jsp");
-
+		if(request.getParameter("shop") != null)
+			response.sendRedirect(request.getContextPath()+"/Product.jsp");
+		else
+			response.sendRedirect(request.getContextPath()+"/ModifyProduct.jsp");
 	}
 	
 	public void DeleteProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -106,8 +108,12 @@ public class ProductServlet extends HttpServlet {
 		ProductService service = new ProductService();
 		int id = Integer.parseInt(request.getParameter("id"));
 		Product product = service.checkProduct(id);
+		product.setProductID(id);
 		request.setAttribute("product", product);
-		request.getRequestDispatcher("/UpdateProduct.jsp").forward(request, response);
+		if (request.getParameter("buy") != null) 
+			request.getRequestDispatcher("/AddCartItem.jsp").forward(request, response);
+		else 	
+			request.getRequestDispatcher("/UpdateProduct.jsp").forward(request, response);
 	}
 	
 	public void CategoryList(HttpServletRequest request, HttpServletResponse response) throws Exception{
