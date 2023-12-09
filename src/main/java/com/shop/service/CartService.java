@@ -15,12 +15,12 @@ public class CartService {
 		this.dao = new CartDaoJdbcImpl();
 	}
 	
-	public CartItem checkCartItem(int id){
+	public CartItem checkCartItem(int id, int userID){
 		Connection connection = null;
 		CartItem result = null;
 		try {
 			connection = JdbcTools.getConnection();
-			result = dao.searchCartItem(connection, id);
+			result = dao.searchCartItem(connection, id, userID);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -55,16 +55,16 @@ public class CartService {
 		return cartItems;
 	}
 	
-	public void deleteProduct(int id){
-//		Connection connection = null;
-//		try {
-//			connection = JdbcTools.getConnection();
-//			dao.deleteProduct(connection, id);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}finally {
-//			JdbcTools.releaseResource(null, connection);
-//		}
+	public void deleteCartItem(int id){
+		Connection connection = null;
+		try {
+			connection = JdbcTools.getConnection();
+			dao.deleteCartItem(connection, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
 	}
 	
 	

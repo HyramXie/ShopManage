@@ -5,7 +5,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Insert title here</title>
-    <link rel="stylesheet" href="./css/Modify.css">
+    <link rel="stylesheet" href="./css/Update.css">
 </head>
 <body>
     <table>
@@ -33,11 +33,12 @@
                 			<c:otherwise>Up</c:otherwise>
                 		</c:choose>
                 	</a></td>
-                	<td><a href="${pageContext.request.contextPath}/SearchProduct?id=${p.getProductID()}">Update</a></td>
+                	<td><a href="${pageContext.request.contextPath}/UpdateProduct.jsp?id=${p.getProductID()}&name=${p.getProductName()}&price=${p.getPrice()}&stock=${p.getStockQuantity()}&cname=${p.getCategoryName()}">Update</a></td>
                 	<td><a href="${pageContext.request.contextPath}/DeleteProduct?id=${p.getProductID()}">Delete</a></td>
            		</tr>
             </c:forEach>
         </tbody>
     </table>
+    <a class="back" href="${pageContext.request.contextPath}/Manage.jsp">Back</a>
 </body>
 </html>

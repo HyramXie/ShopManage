@@ -13,10 +13,8 @@ public interface CartDao {
 	public void deleteCartItem(Connection connection, int id) throws SQLException;
 	
 	public void updateCartItem(Connection connection, CartItem cartItem) throws SQLException;
-
-//	public CartItem searchCartItem(Connection connection, CartItem cartItem) throws SQLException;
 	
-	public CartItem searchCartItem(Connection connection, int id) throws SQLException;
+	public CartItem searchCartItem(Connection connection, int id, int userID) throws SQLException;
 	
 	public List<CartItem> fetchAllCartItem(Connection connection, int id) throws SQLException;
 }

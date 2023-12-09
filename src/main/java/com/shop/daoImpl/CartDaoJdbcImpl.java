@@ -19,23 +19,23 @@ public class CartDaoJdbcImpl extends DaoJdbcImpl<CartItem> implements CartDao{
 
 	@Override
 	public void deleteCartItem(Connection connection, int id) throws SQLException {
-//		String sql = "DELETE FROM product WHERE ProductID=?;";
-//		Object[] objects = {id};
-//		update(connection, sql, objects);
+		String sql = "DELETE FROM cartitem WHERE CartItemID=?;";
+		Object[] objects = {id};
+		update(connection, sql, objects);
 	}
 
 	@Override
 	public void updateCartItem(Connection connection, CartItem cartItem) throws SQLException {
-		String sql = "UPDATE cartitem SET Quantity=? WHERE ProductID=?;";
-		Object[] objects = {cartItem.getQuantity(), cartItem.getProductID()};
+		String sql = "UPDATE cartitem SET Quantity=?	WHERE CartItemID=?;";
+		Object[] objects = {cartItem.getQuantity(), cartItem.getCartItemID()};
 		update(connection, sql, objects);
 		
 	}
 
 	@Override
-	public CartItem searchCartItem(Connection connection, int id) throws SQLException {
-		String sql = "SELECT * FROM cartitem WHERE ProductID=?;";
-		Object[] objects = {id};
+	public CartItem searchCartItem(Connection connection, int id, int userID) throws SQLException {
+		String sql = "SELECT * FROM cartitem WHERE ProductID=? AND UserID=?;";
+		Object[] objects = {id, userID};
 		return fetch(connection, sql, objects);
 	}
 

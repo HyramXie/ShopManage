@@ -5,18 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Category</title>
-    <link rel="stylesheet" href="./css/editUser.css">
+    <link rel="stylesheet" href="./css/Edit.css">
 
 </head>
 <body>
     <div class="container">
         <h1>Update Category</h1>
         <form action="UpdateCategory" method="post">
-        	<input type="hidden" id="id" name="id" value="${requestScope.category.getCategoryID() }">
+        	<input type="hidden" id="id" name="id" value="${param.id}">
             <label for="name">Category:</label>
-            <input type="text" id="name" name="name" value="${requestScope.category.getCategoryName() }"><br>
+            <input type="text" id="name" name="name" value="${param.name }"><br>
             <input type="submit" value="Submit">
         </form>
     </div>
+    <a class="back" href="${pageContext.request.contextPath}/ModifyCategory.jsp">Back</a>
 </body>
 </html>

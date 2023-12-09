@@ -1,0 +1,67 @@
+@charset "UTF-8";
+/* Order.css */
+
+body, h1, table {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    text-align: center;
+    margin: 20px; /* Add some margin around the body */
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border: 1px solid #ddd; /* Set a border around the whole table */
+}
+
+table th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Add a bottom border to header cells */
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Add a bottom border to data cells */
+}
+
+a {
+	text-align: center;
+    display: block;
+    margin: 5px 0;
+    padding: 8px 8px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    background-color: #007bff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+table td p {
+    margin: 5px 0;
+}
+.back{
+			position: absolute;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+}

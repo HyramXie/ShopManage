@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit User Information</title>
-    <link rel="stylesheet" href="./css/editUser.css">
+    <link rel="stylesheet" href="./css/Edit.css">
 </head>
 <body>
     <div class="container">
@@ -18,8 +18,12 @@
             <input type="text" id="phone" name="phone" value="${sessionScope.user.getPhoneNumber()}"><br>
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" value="${sessionScope.user.getEmail()}"><br>
+             <label for="email">Address:</label>
+            <input type="text" id="address" name="address" value="${sessionScope.user.getAddress()}"><br>
             <input type="submit" value="Submit">
+            
         </form>
     </div>
+   <a class="back" href="${pageContext.request.contextPath}/Home.jsp">Back</a>
 </body>
 </html>

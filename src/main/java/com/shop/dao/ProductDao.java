@@ -14,6 +14,8 @@ public interface ProductDao {
 	public void updateProduct(Connection connection, Product product) throws SQLException;
 	
 	public void updateProduct(Connection connection, int id) throws SQLException;
+	
+	public void updateProduct(Connection connection, int id, int quantity) throws SQLException;
 
 	public Product searchProduct(Connection connection, Product product) throws SQLException;
 	

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <link rel="stylesheet" href="./css/Page.css">
+    <link rel="stylesheet" href="./css/Login.css">
     
 </head>
 <body>
@@ -17,7 +17,8 @@
             <input type="password" id="password" name="password"><br>
             <input type="submit" value="Submit"><br>
         </form>
-        <a href="./Register.jsp">Register</a>
+        <a class="register" href="./Register.jsp">Register</a>
     </div>
+    <a class="back" href="${pageContext.request.contextPath}/index.jsp">Back</a>
 </body>
 </html>

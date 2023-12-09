@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration Page</title>
-    <link rel="stylesheet" href="./css/Page.css">
+    <link rel="stylesheet" href="./css/Login.css">
 </head>
 <body>
     <div class="container">
@@ -18,8 +18,11 @@
             <input type="text" id="phone" name="phone"><br>
             <label for="email">Email:</label>
             <input type="text" id="email" name="email"><br>
+            <label for="email">Address:</label>
+            <input type="text" id="address" name="address"><br>
             <input type="submit" value="Submit">
         </form>
     </div>
+    <a class="back" href="${pageContext.request.contextPath}/UserLogin.jsp">Back</a>
 </body>
 </html>

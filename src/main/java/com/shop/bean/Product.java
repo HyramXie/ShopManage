@@ -10,7 +10,11 @@ public class Product {
     private int status;
 
     public Product() {
-		// TODO Auto-generated constructor stub
+	}
+    
+    public Product(String productName) {
+    	super();
+		this.productName = productName;
 	}
     
     public Product(String productName, double price, int stockQuantity, int categoryID) {

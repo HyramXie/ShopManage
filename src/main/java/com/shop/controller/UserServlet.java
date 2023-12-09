@@ -75,7 +75,8 @@ public class UserServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
-		User user = new User(name, password, email, phone);
+		String address = request.getParameter("address");
+		User user = new User(name, password, email, phone, address);
 		User result = service.checkUser(user);
 		if (result == null) {
 			service.registUser(user);
@@ -95,10 +96,10 @@ public class UserServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
 		User user1 = (User)session.getAttribute("user");
- 		User user = new User(name, password, email, phone);
+ 		User user = new User(name, password, email, phone, address);
  		user.setUserID(user1.getUserID());
- 		System.out.println(user1.getUserID());
  		service.changeUser(user);
  		session.setAttribute("user", user);
  		response.sendRedirect(request.getContextPath()+"/Home.jsp");

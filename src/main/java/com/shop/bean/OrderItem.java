@@ -5,13 +5,13 @@ public class OrderItem {
     private int orderID;
     private int productID;
     private int quantity;
+    private String productName;
     
     public OrderItem() {
 		// TODO Auto-generated constructor stub
 	}
     
-	public OrderItem(int orderItemID, int orderID, int productID, int quantity) {
-		this.orderItemID = orderItemID;
+	public OrderItem(int orderID, int productID, int quantity) {
 		this.orderID = orderID;
 		this.productID = productID;
 		this.quantity = quantity;
@@ -39,6 +39,14 @@ public class OrderItem {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
     

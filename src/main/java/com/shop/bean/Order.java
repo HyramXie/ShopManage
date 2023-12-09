@@ -1,22 +1,24 @@
 package com.shop.bean;
 
-import java.sql.Date;
 
 public class Order {
     private int orderID;
     private int userID;
-    private Date orderDate;
-	private String status;
+    private String orderDate;
+	private int status;
+	private double price;
+	private String address;
 	
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Order(int orderID, int userID, Date orderDate, String status) {
-		this.orderID = orderID;
+	public Order(int userID, String orderDate, int status, double price, String address) {
 		this.userID = userID;
 		this.orderDate = orderDate;
 		this.status = status;
+		this.price = price;
+		this.address = address;
 	}
 	
 	public int getOrderID() {
@@ -31,17 +33,33 @@ public class Order {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

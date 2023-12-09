@@ -13,15 +13,15 @@ public class UserDaoJdbcImpl extends DaoJdbcImpl<User> implements UserDao{
 	}
 	@Override
 	public void addUser(Connection connection, User user) throws SQLException {
-		String sql = "INSERT INTO user (Username, Password, Email, PhoneNumber) VALUES (?, ?, ?, ?);";
-		Object[] objects = {user.getUsername(), user.getPassword(), user.getEmail(), user.getPhoneNumber()};
+		String sql = "INSERT INTO user (Username, Password, Email, PhoneNumber, Address) VALUES (?, ?, ?, ?, ?);";
+		Object[] objects = {user.getUsername(), user.getPassword(), user.getEmail(), user.getPhoneNumber(), user.getAddress()};
 		update(connection, sql, objects);
 	}
 
 	@Override
 	public void updateUser(Connection connection, User user) throws SQLException {
-		String sql = "UPDATE user SET Username = ?,  Password = ?, Email = ?, PhoneNumber = ?	WHERE UserID = ?;";
-		Object[] objects = { user.getUsername(),user.getPassword(), user.getEmail(), user.getPhoneNumber(), user.getUserID()};
+		String sql = "UPDATE user SET Username = ?,  Password = ?, Email = ?, PhoneNumber = ?, Address = ?	WHERE UserID = ?;";
+		Object[] objects = { user.getUsername(),user.getPassword(), user.getEmail(), user.getPhoneNumber(), user.getAddress(), user.getUserID()};
 		update(connection, sql, objects);
 	}
 

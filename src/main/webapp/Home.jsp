@@ -11,10 +11,11 @@
         <h1>Welcome to Our Shop</h1>
         <div class="links">
             <a href="${pageContext.request.contextPath}/EditUser.jsp">Edit Information</a>
-            <a href="${pageContext.request.contextPath}/GetProduct?shop=1">Shop Products</a>
+            <a href="${pageContext.request.contextPath}/Product?shop=1">Shop Products</a>
             <a href="${pageContext.request.contextPath}/ShopCart">Shop Cart</a>
-            <a href="${pageContext.request.contextPath}/Order.jsp">Order</a>
+            <a href="${pageContext.request.contextPath}/MyOrder">Order</a>
         </div>
     </div>
+    
 </body>
 </html>

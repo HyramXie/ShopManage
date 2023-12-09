@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Product</title>
-    <link rel="stylesheet" href="./css/editUser.css">
+    <link rel="stylesheet" href="./css/Edit.css">
 </head>
 <body>
     <div class="container">
@@ -15,5 +15,6 @@
         	<input type="submit" value="Submit">
         </form>
     </div>
+    <a class="back" href="${pageContext.request.contextPath}/Manage.jsp">Back</a>
 </body>
 </html>

@@ -105,4 +105,16 @@ public class ProductService {
 		}
 	}
 	
+	public void updateProduct(int id, int quantity){
+		Connection connection = null;
+		try {
+			connection = JdbcTools.getConnection();
+			dao.updateProduct(connection, id, quantity);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
+	}
+	
 }

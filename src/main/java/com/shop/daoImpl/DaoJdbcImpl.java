@@ -44,7 +44,7 @@ public class DaoJdbcImpl<T> implements Dao<T> {
 		BeanHandler<T> rsh = new BeanHandler<T>(type);
 		return queryRunner.query(connection, sql, rsh, objects);
 	}
-
+	
 	@Override
 	public List<T> fetchList(Connection connection, String sql, Object... objects) throws SQLException {
 		BeanListHandler<T> rsh = new BeanListHandler<T>(type);

@@ -5,7 +5,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Product</title>
-    <link rel="stylesheet" href="./css/Modify.css">
+    <link rel="stylesheet" href="./css/Update.css">
 </head>
 <body>
     <table>
@@ -15,6 +15,7 @@
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Category</th>
+                <th>Add ShopCart</th>
                 <th>Buy</th>
             </tr>
         </thead>
@@ -26,11 +27,13 @@
                 	<td>${p.getPrice()}</td>
                 	<td>${p.getStockQuantity()}</td>
                 	<td>${p.getCategoryName()}</td>
-                	<td><a href="${pageContext.request.contextPath}/SearchProduct?id=${p.getProductID()}&buy=1">Add</a></td>
+                	<td><a href="${pageContext.request.contextPath}/AddCartItem.jsp?id=${p.getProductID()}&cid=${p.getCategoryID()}&name=${p.getProductName()}&price=${p.getPrice()}&stock=${p.getStockQuantity()}&cname=${p.getCategoryName()}">Add</a></td>
+                	<td><a href="${pageContext.request.contextPath}/BuyProduct.jsp?id=${p.getProductID()}&cid=${p.getCategoryID()}&name=${p.getProductName()}&price=${p.getPrice()}&stock=${p.getStockQuantity()}&cname=${p.getCategoryName()}">Buy</a></td>
            		</tr>
            		</c:if>
             </c:forEach>
         </tbody>
     </table>
+    <a class="back" href="${pageContext.request.contextPath}/Home.jsp">Back</a>
 </body>
 </html>

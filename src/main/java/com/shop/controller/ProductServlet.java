@@ -2,7 +2,7 @@ package com.shop.controller;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,12 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.shop.bean.Product;
 import com.shop.bean.Category;
+import com.shop.bean.Order;
+import com.shop.bean.OrderItem;
+import com.shop.bean.Product;
+import com.shop.bean.User;
 import com.shop.service.CategoryService;
+import com.shop.service.OrderItemService;
+import com.shop.service.OrderService;
 import com.shop.service.ProductService;
 
-@WebServlet(urlPatterns={"/ProductServlet", "/GetSelect", "/AddProduct", "/GetProduct", "/DeleteProduct", "/SearchProduct", "/UpdateProduct", "/ChangeStatus"})
+@WebServlet(urlPatterns={"/Product", "/GetSelect", "/AddProduct", "/ModifyProduct", "/DeleteProduct", "/UpdateProduct", "/ChangeStatus", "/BuyProduct"})
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,34 +53,24 @@ public class ProductServlet extends HttpServlet {
 	public void AddProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ProductService service = new ProductService();
 		String name = request.getParameter("name");
-		String priceStr = request.getParameter("price");
-		String stockStr = request.getParameter("stock");
-		String categoryIdStr = request.getParameter("categoryid");
-		
-		double price = 0.0;
-		int stock = 0;
-		int categoryId = 0;
-		if (priceStr != null && !priceStr.isEmpty()) 
-		    price = Double.parseDouble(priceStr);
-		if (stockStr != null && !stockStr.isEmpty()) 
-		    stock = Integer.parseInt(stockStr);
-		if (categoryIdStr != null && !categoryIdStr.isEmpty())
-		    categoryId = Integer.parseInt(categoryIdStr);
-		
+		double price = Double.parseDouble(request.getParameter("price"));
+		int stock = Integer.parseInt(request.getParameter("stock"));
+		int categoryId = Integer.parseInt(request.getParameter("categoryid"));
+
 		Product product = new Product(name, price, stock, categoryId);
 		if (service.checkProduct(product) == null) {
 			service.addProduct(product);
+			GetProduct(request, response);
 		}
 		response.sendRedirect(request.getContextPath()+"/AddProduct.jsp");
 
 	}
 	
-	public void GetProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void Product(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		CategoryList(request, response);
 		HttpSession session = request.getSession();
-		if (session.getAttribute("products") == null || request.getParameter("change") != null) {
-			ProductService service = new ProductService();
-			List<Product> products = service.getProductList();
-			session.setAttribute("products", products);
+		if (session.getAttribute("products") == null) {
+			GetProduct(request, response);
 		}
 		if(request.getParameter("shop") != null)
 			response.sendRedirect(request.getContextPath()+"/Product.jsp");
@@ -87,7 +82,8 @@ public class ProductServlet extends HttpServlet {
 		ProductService service = new ProductService();
 		int id = Integer.parseInt(request.getParameter("id"));
 		service.deleteProduct(id);
-		response.sendRedirect(request.getContextPath()+"/GetProduct?change=1");
+		GetProduct(request, response);
+		response.sendRedirect(request.getContextPath()+"/ModifyProduct.jsp");
 	}
 	
 	public void UpdateProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -100,22 +96,21 @@ public class ProductServlet extends HttpServlet {
 		
 		Product product = new Product(id, name, price, stock, categoryid);
 		service.updateProduct(product);
-		response.sendRedirect(request.getContextPath()+"/GetProduct?change=1");
+		GetProduct(request, response);
+		response.sendRedirect(request.getContextPath()+"/ModifyProduct.jsp");
 	}
 	
-	public void SearchProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		CategoryList(request, response);
+	public void ChangeStatus(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ProductService service = new ProductService();
 		int id = Integer.parseInt(request.getParameter("id"));
-		Product product = service.checkProduct(id);
-		product.setProductID(id);
-		request.setAttribute("product", product);
-		if (request.getParameter("buy") != null) 
-			request.getRequestDispatcher("/AddCartItem.jsp").forward(request, response);
-		else 	
-			request.getRequestDispatcher("/UpdateProduct.jsp").forward(request, response);
+		service.updateProduct(id);
+		GetProduct(request, response);
+		response.sendRedirect(request.getContextPath()+"/ModifyProduct.jsp");
 	}
 	
+	
+	
+	//这里进行统一判断
 	public void CategoryList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		HttpSession session = request.getSession();
 		if (session.getAttribute("categories") == null) {
@@ -124,12 +119,40 @@ public class ProductServlet extends HttpServlet {
 			session.setAttribute("categories", categories);
 		}
 	}
-	
-	public void ChangeStatus(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	//shop管理
+	public void GetProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
 		ProductService service = new ProductService();
-		int id = Integer.parseInt(request.getParameter("id"));
-		service.updateProduct(id);
-		response.sendRedirect(request.getContextPath()+"/GetProduct?change=1");
+		List<Product> products = service.getProductList();
+		session.setAttribute("products", products);
 	}
+	
+	public void BuyProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		OrderService orderService = new OrderService();
+		ProductService productService = new ProductService();
+		OrderItemService orderItemService = new OrderItemService();
+		int id = Integer.parseInt(request.getParameter("id"));
+		Product product = productService.checkProduct(id);
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		if (quantity > product.getStockQuantity()) {
+ 			request.setAttribute("result", true);
+			request.getRequestDispatcher("/BuyProduct.jsp").forward(request, response);
+		}
+		else {
+			HttpSession session =request.getSession();
+			int userid = ((User)session.getAttribute("user")).getUserID();
+			String address = ((User)session.getAttribute("user")).getAddress();
+			double price = product.getPrice()*quantity;
+			Order order = new Order(userid, (new Date()).toString(), 0, price, address);
+			Object object = orderService.addOrder(order);
+			int orderID = Integer.parseInt(object.toString());
+			OrderItem orderItem = new OrderItem(orderID, id, quantity);
+			orderItemService.addOrderItem(orderItem);
+			productService.updateProduct(id, quantity);
+			GetProduct(request, response);
+			response.sendRedirect(request.getContextPath()+"/OrderDetail?id="+orderID);
+		}
+	}
+
 	
 }

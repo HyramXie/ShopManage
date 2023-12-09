@@ -13,7 +13,7 @@ public class ProductDaoJdbcImpl extends DaoJdbcImpl<Product> implements ProductD
 
 	@Override
 	public void addProduct(Connection connection, Product product) throws SQLException {
-		String sql = "INSERT INTO product (ProductName, Price, StockQuantity, CategoryID) VALUES (?, ?, ?, ?);";
+		String sql = "INSERT INTO product (ProductName, Price, StockQuantity, CategoryID, Status) VALUES (?, ?, ?, ?, 0);";
 		Object[] objects = {product.getProductName(), product.getPrice(), product.getStockQuantity(), product.getCategoryID()};
 		update(connection, sql, objects);
 	}
@@ -43,6 +43,14 @@ public class ProductDaoJdbcImpl extends DaoJdbcImpl<Product> implements ProductD
 				+ "END \r\n"
 				+ "WHERE ProductID = ?;";
 		Object[] objects = {id};
+		update(connection, sql, objects);
+		
+	}
+	
+	@Override
+	public void updateProduct(Connection connection, int id, int quantity) throws SQLException {
+		String sql = "UPDATE product SET StockQuantity = StockQuantity - ? WHERE ProductID = ?;";
+		Object[] objects = {quantity, id};
 		update(connection, sql, objects);
 		
 	}

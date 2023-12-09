@@ -16,7 +16,7 @@ import com.shop.service.CategoryService;
 
 
 
-@WebServlet(urlPatterns={"/CategoryServlet", "/AddCategory", "/GetCategory", "/SearchCategory", "/DeleteCategory", "/UpdateCategory"})
+@WebServlet(urlPatterns={"/CategoryServlet", "/AddCategory", "/ModifyCategory", "/DeleteCategory", "/UpdateCategory"})
 public class CategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -50,17 +50,17 @@ public class CategoryServlet extends HttpServlet {
 		if (!service.checkCategory(category)) {
 			service.addCategory(category);
 		}
+		GetCategory(request, response);
 		response.sendRedirect(request.getContextPath()+"/AddCategory.jsp");
 
 	}
 	
-	public void GetCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void ModifyCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("categories") == null || request.getParameter("change") != null) {
-			CategoryService service = new CategoryService();
-			List<Category> categories = service.getCategoryList();
-			session.setAttribute("categories", categories);
+		if (session.getAttribute("categories") != null) {
+			GetCategory(request, response);
 		}
+		GetCategory(request, response);
 		response.sendRedirect(request.getContextPath()+"/ModifyCategory.jsp");
 
 	}
@@ -69,7 +69,8 @@ public class CategoryServlet extends HttpServlet {
 		CategoryService service = new CategoryService();
 		int id = Integer.parseInt(request.getParameter("id"));
 		service.deleteCategory(id);
-		response.sendRedirect(request.getContextPath()+"/GetCategory?change=1");
+		GetCategory(request, response);
+		response.sendRedirect(request.getContextPath()+"/ModifyCategory.jsp");
 	}
 	
 	public void UpdateCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -78,14 +79,14 @@ public class CategoryServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Category category = new Category(id, name);
 		service.updateCategory(category);
-		response.sendRedirect(request.getContextPath()+"/GetCategory?change=1");
+		GetCategory(request, response);
+		response.sendRedirect(request.getContextPath()+"/ModifyCategory.jsp");
 	}
 	
-	public void SearchCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void GetCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
 		CategoryService service = new CategoryService();
-		int id = Integer.parseInt(request.getParameter("id"));
-		Category category = service.checkCategory(id);
-		request.setAttribute("category", category);
-		request.getRequestDispatcher("/UpdateCategory.jsp").forward(request, response);
+		List<Category> categories = service.getCategoryList();
+		session.setAttribute("categories", categories);
 	}
 }

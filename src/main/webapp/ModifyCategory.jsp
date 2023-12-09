@@ -5,7 +5,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>ModifyCategory</title>
-    <link rel="stylesheet" href="./css/Modify.css">
+    <link rel="stylesheet" href="./css/Update.css">
     <script type="text/javascript">
     if(window.name != "noReload"){
         window.name = "noReload";
@@ -28,11 +28,12 @@
         	<c:forEach items="${sessionScope.categories}" var="cate" >
         		<tr>
                 	<td>${cate.getCategoryName()}</td>
-                	<td><a href="${pageContext.request.contextPath}/SearchCategory?id=${cate.getCategoryID()}">Update</a></td>
+                	<td><a href="${pageContext.request.contextPath}/UpdateCategory.jsp?id=${cate.getCategoryID()}&name=${cate.getCategoryName()}">Update</a></td>
                 	<td><a href="${pageContext.request.contextPath}/DeleteCategory?id=${cate.getCategoryID()}">Delete</a></td>
            		</tr>
             </c:forEach>
         </tbody>
     </table>
+    <a class="back" href="${pageContext.request.contextPath}/Manage.jsp">Back</a>
 </body>
 </html>
