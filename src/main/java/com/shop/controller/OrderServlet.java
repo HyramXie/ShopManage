@@ -15,9 +15,11 @@ import javax.servlet.http.HttpSession;
 
 import com.shop.bean.Order;
 import com.shop.bean.OrderItem;
+import com.shop.bean.Product;
 import com.shop.bean.User;
 import com.shop.service.OrderItemService;
 import com.shop.service.OrderService;
+import com.shop.service.ProductService;
 
 @WebServlet(urlPatterns={"/OrderServlet", "/MyOrder", "/OrderDetail", "/ChangeOrderStatus", "/DeleteOrder", "/OrderDeal", "/ManageChangeOrder"})
 public class OrderServlet extends HttpServlet {
@@ -80,11 +82,16 @@ public class OrderServlet extends HttpServlet {
 		Order order = service.checkOrder(orderID);
 		int status = order.getStatus();
 		int changeStatus = status;
-		if(status == 0 || status == -1) {
+		if(status == 0 || status == -1)
 			changeStatus = 1;
-		}else if(status > 0){
+		else if(status == 1)
 			changeStatus = -1;
-		}else {}
+		else if (status == 2) 
+			if (request.getParameter("action") == "Receive" || request.getParameter("action") == null) 
+				changeStatus = 3;
+			else 
+				changeStatus = -1;
+		else {}
 		if (status == 0) {
 			String address = request.getParameter("address");
 			if (address == "") {
@@ -108,7 +115,7 @@ public class OrderServlet extends HttpServlet {
 		int orderID = Integer.parseInt(request.getParameter("id")) ; 
 		Order order = service.checkOrder(orderID);
 		int status = order.getStatus();
-		if(status == 2 || status == -2 || status == 0) {
+		if(status == 3 || status == -2 || status == 0) {
 			service.deleteOrder(orderID);
 			MyOrder(request, response);
 		}else {
@@ -130,6 +137,8 @@ public class OrderServlet extends HttpServlet {
 	
 	public void ManageChangeOrder(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		OrderService service = new OrderService();
+		OrderItemService orderItemService = new OrderItemService();
+		ProductService productService = new ProductService();
 		int orderID = Integer.parseInt(request.getParameter("id")) ; 
 		Order order = service.checkOrder(orderID);
 		int status = order.getStatus();
@@ -137,6 +146,12 @@ public class OrderServlet extends HttpServlet {
 		if(status == 1) {
 			changeStatus = 2;
 		}else if(status == -1){
+			List<OrderItem> oredeItems = orderItemService.getOrderItemList(orderID);
+			for (OrderItem orderItem : oredeItems)
+				productService.updateProduct(orderItem.getProductID(), orderItem.getQuantity());
+			List<Product> products = productService.getProductList();
+			HttpSession session = request.getSession();
+			session.setAttribute("products", products);
 			changeStatus = -2;
 		}else {}
 		service.updateOrder(orderID, changeStatus);

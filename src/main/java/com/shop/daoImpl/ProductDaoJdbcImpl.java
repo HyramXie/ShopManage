@@ -49,7 +49,7 @@ public class ProductDaoJdbcImpl extends DaoJdbcImpl<Product> implements ProductD
 	
 	@Override
 	public void updateProduct(Connection connection, int id, int quantity) throws SQLException {
-		String sql = "UPDATE product SET StockQuantity = StockQuantity - ? WHERE ProductID = ?;";
+		String sql = "UPDATE product SET StockQuantity = StockQuantity + ? WHERE ProductID = ?;";
 		Object[] objects = {quantity, id};
 		update(connection, sql, objects);
 		

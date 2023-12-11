@@ -68,10 +68,7 @@ public class ProductServlet extends HttpServlet {
 	
 	public void Product(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		CategoryList(request, response);
-		HttpSession session = request.getSession();
-		if (session.getAttribute("products") == null) {
-			GetProduct(request, response);
-		}
+		GetProduct(request, response);
 		if(request.getParameter("shop") != null)
 			response.sendRedirect(request.getContextPath()+"/Product.jsp");
 		else

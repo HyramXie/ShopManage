@@ -39,6 +39,7 @@ public class AdminServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	//管理员登陆
 	public void AdminLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -48,6 +49,7 @@ public class AdminServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		Admin admin = new Admin(name, password);
 		Admin result = service.checkAdmin(admin);
+		//登录查询
 		if (result != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("admin", result);
@@ -56,11 +58,6 @@ public class AdminServlet extends HttpServlet {
 		else {
 			out.print("<script> alert('登录失败，用户名不存在！请先注册！'); </script>");
 		}
-	}
-	
-	public void AddProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.print("hello");
-		response.sendRedirect(request.getContextPath()+"/AddProduct.jsp");
 	}
 
 }

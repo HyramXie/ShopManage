@@ -37,9 +37,9 @@
                         <td><a href="${pageContext.request.contextPath}/ChangeOrderStatus?id=${order.getOrderID()}">
                         		<c:choose>
 									<c:when test="${order.getStatus() == 0}">Pay</c:when>
-									<c:when test="${order.getStatus() == 1 || order.getStatus() == 2}">Refund</c:when>
+									<c:when test="${order.getStatus() == 1}">Refund</c:when>
+									<c:when test="${order.getStatus() == 2}">Receive</c:when>
 									<c:when test="${order.getStatus() == -1}">Cancel</c:when>
-									<c:when test="${order.getStatus() == -2}">Success</c:when>
 									<c:otherwise>Success</c:otherwise>
 								</c:choose>
                         	</a>

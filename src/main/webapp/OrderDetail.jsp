@@ -20,6 +20,29 @@
             <p>${requestScope.oneOrder.getPrice()}</p><br>
             <label for="date">OrderDate:</label>
             <p>${requestScope.oneOrder.getOrderDate()}</p><br>
+            <label for="status">Status:</label>
+	           <p>
+	            <c:choose>
+					<c:when test="${requestScope.oneOrder.getStatus() == 0}">
+						未付款
+					</c:when>
+					<c:when test="${requestScope.oneOrder.getStatus() == 1}">
+						已付款
+					</c:when>
+					<c:when test="${requestScope.oneOrder.getStatus() == 2}">
+						已发货
+					</c:when>
+					<c:when test="${requestScope.oneOrder.getStatus() == -1}">
+						退款中
+					</c:when>
+					<c:when test="${requestScope.oneOrder.getStatus() == -2}">
+						退款成功
+					</c:when>
+					<c:otherwise>
+						已收货
+					</c:otherwise>
+				</c:choose>
+			</p><br>
 			<label for="address">Address:</label>
 			<c:choose>
 				<c:when test="${requestScope.oneOrder.getStatus() == 0}">
@@ -34,8 +57,12 @@
 				<c:when test="${requestScope.oneOrder.getStatus() == 0}">
 					<input type="submit" value="Pay">
 				</c:when>
-				<c:when test="${requestScope.oneOrder.getStatus() > 0}">
+				<c:when test="${requestScope.oneOrder.getStatus() == 1}">
 					<input type="submit" value="Refund">
+				</c:when>
+				<c:when test="${requestScope.oneOrder.getStatus() == 2}">
+					<input type="submit" name="action" value="Receive"><br>
+					<input type="submit" name="action" value="Refund">
 				</c:when>
 				<c:when test="${requestScope.oneOrder.getStatus() == -1}">
 					<input type="submit" value="Cancel">

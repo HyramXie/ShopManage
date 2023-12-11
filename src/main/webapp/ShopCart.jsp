@@ -15,6 +15,7 @@
 	            	<th></th>
 	                <th>Product</th>
 	                <th>Price</th>
+	                <th>Stock</th>
 	                <th>Quantity</th>
 	                <th>Update</th>
 	                <th>Delete</th>
@@ -29,9 +30,8 @@
 	                	<td>${cart.getProductName()}
 	                			<input type="hidden" name="pid" value="${cart.getProductID()}">
 	                	</td>
-	                	<td>${cart.getPrice()*cart.getQuantity()}
-	                		<input type="hidden" name="sum" value="${cart.getPrice()*cart.getQuantity()}">
-	                	</td>
+	                	<td>${cart.getPrice()*cart.getQuantity()}</td>
+	                	<td>${cart.getStockQuantity()}</td>
 	                	<td>${cart.getQuantity()}
 	                			<input type="hidden" name="quantity" value="${cart.getQuantity()}">
 	                	</td>

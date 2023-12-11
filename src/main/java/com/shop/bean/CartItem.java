@@ -5,6 +5,7 @@ public class CartItem {
     private int userID;
     private int productID;
     private int quantity;
+    private int stockQuantity;
     private double price;
     private String productName;
     
@@ -62,6 +63,14 @@ public class CartItem {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public int getStockQuantity() {
+		return stockQuantity;
+	}
+
+	public void setStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
 	}
 
     

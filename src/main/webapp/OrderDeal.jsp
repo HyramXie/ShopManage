@@ -16,9 +16,8 @@
                 <th>Product</th>
                 <th>OrderDate</th>
                 <th>Price</th>
-                <th>Status</th>
-                <th>Detail</th>
                 <th>Deal</th>
+                <th>Detail</th>
             </tr>
         </thead>
         <tbody>
@@ -36,11 +35,11 @@
                         <td>${order.getPrice() }</td>
                         <td><a href="${pageContext.request.contextPath}/ManageChangeOrder?id=${order.getOrderID()}">
                         		<c:choose>
+                        			<c:when test="${order.getStatus() == 0}">UnPay</c:when>
 									<c:when test="${order.getStatus() == 1}">Deliver</c:when>
-									<c:when test="${order.getStatus() == 2}">Success</c:when>
+									<c:when test="${order.getStatus() == 2}">Delivered</c:when>
 									<c:when test="${order.getStatus() == -1}">Refund</c:when>
-									<c:when test="${order.getStatus() == -2}">Success</c:when>
-									<c:otherwise>UnPay</c:otherwise>
+									<c:otherwise>Success</c:otherwise>
 								</c:choose>
                         	</a>
                         </td>

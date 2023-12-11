@@ -41,7 +41,7 @@ public class CartDaoJdbcImpl extends DaoJdbcImpl<CartItem> implements CartDao{
 
 	@Override
 	public List<CartItem> fetchAllCartItem(Connection connection, int id) throws SQLException {
-		String sql = "SELECT c.CartItemID, c.ProductID, p.ProductName, p.Price, c.Quantity\r\n"
+		String sql = "SELECT c.CartItemID, c.ProductID, p.ProductName, p.Price, c.Quantity, p.StockQuantity\r\n"
 				+ "FROM cartitem c	JOIN product p ON c.ProductID = p.ProductID\r\n"
 				+ "WHERE c.UserID = ?";
 		Object[] objects = {id};
