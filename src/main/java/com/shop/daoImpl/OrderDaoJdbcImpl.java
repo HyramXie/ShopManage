@@ -10,8 +10,8 @@ public class OrderDaoJdbcImpl extends DaoJdbcImpl<Order> implements OrderDao{
 
 	@Override
 	public Object addOrder(Connection connection, Order order) throws SQLException {
-		String sql = "INSERT INTO `order` (UserID, OrderDate, `Status`, Price, Address) VALUES (?, ?, ?, ?, ?);";
-		Object[] objects = {order.getUserID(), order.getOrderDate(), order.getStatus(), order.getPrice(), order.getAddress()};
+		String sql = "INSERT INTO `order` (UserID, OrderDate, `Status`, Price, Address, Name, Phone) VALUES (?, ?, ?, ?, ?, ?, ?);";
+		Object[] objects = {order.getUserID(), order.getOrderDate(), order.getStatus(), order.getPrice(), order.getAddress(), order.getName(), order.getPhone()};
 		update(connection, sql, objects);
 		String sql1 = "SELECT LAST_INSERT_ID();";
 		return fetchScaler(connection, sql1);
@@ -33,9 +33,9 @@ public class OrderDaoJdbcImpl extends DaoJdbcImpl<Order> implements OrderDao{
 	}
 	
 	@Override
-	public void updateOrder(Connection connection, int orderID, int status, String address) throws SQLException {
-		String sql = "UPDATE `order` SET  `Status` = ?, Address = ? WHERE OrderID=?;";
-		Object[] objects = {status, address, orderID};
+	public void updateOrder(Connection connection, int orderID, int status, String address, String name, String phone) throws SQLException {
+		String sql = "UPDATE `order` SET  `Status` = ?, Address = ?, Name = ?, Phone = ? WHERE OrderID=?;";
+		Object[] objects = {status, address, name, phone, orderID};
 		update(connection, sql, objects);
 	}
 

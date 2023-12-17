@@ -25,7 +25,7 @@ public class UserServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("utf-8");
 		String servletPath = request.getServletPath();
 		String methodName =  servletPath.substring(1, servletPath.length()-5);
 		try {
@@ -49,15 +49,10 @@ public class UserServlet extends HttpServlet {
 		String name = request.getParameter("username");
 		String password = request.getParameter("password");
 		User user = new User(name, password);
-		User result = service.checkUser(user);
+		User result = service.searchUser(user);
 		if (result != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", result);
-			
-//			Cookie cookie = new Cookie("username", result.getUsername());
-//			cookie.setMaxAge(60 * 60);
-//			response.addCookie(cookie);
-			
 			response.sendRedirect(request.getContextPath()+"/Home.jsp");
 		}
 		else {
@@ -80,11 +75,12 @@ public class UserServlet extends HttpServlet {
 		User result = service.checkUser(user);
 		if (result == null) {
 			service.registUser(user);
-			response.sendRedirect(request.getContextPath()+"/UserLogin.jsp");
+			out.print("<script> alert('注册成功'); </script>");
+			out.print("<script> setTimeout(()=>{window.location.replace('http://localhost:8080/javawebshop/UserLogin.jsp')},10) </script>");
 		}
 		else {
 			out.print("<script> alert('用户已存在'); </script>");
-			response.sendRedirect(request.getContextPath()+"/Register.jsp");
+			out.print("<script> setTimeout(()=>{window.location.replace('http://localhost:8080/javawebshop/Register.jsp')},10) </script>");
 		}
 	}
 	

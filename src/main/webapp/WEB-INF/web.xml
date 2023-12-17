@@ -10,12 +10,34 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
    <filter>
-    <filter-name>loginFilter</filter-name>
-    <filter-class>com.shop.filter.LoginFilter</filter-class>
+    <filter-name>userLoginFilter</filter-name>
+    <filter-class>com.shop.filter.UserLoginFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>loginFilter</filter-name>
-    <url-pattern>/home.jsp</url-pattern>
-    <url-pattern>/editUser.jsp</url-pattern>
+    <filter-name>userLoginFilter</filter-name>
+    <url-pattern>/Home.jsp</url-pattern>
+    <url-pattern>/EditUser.jsp</url-pattern>
+    <url-pattern>/Product.jsp</url-pattern>
+    <url-pattern>/ShopCart.jsp</url-pattern>
+     <url-pattern>/MyOrder.jsp</url-pattern>
+     <url-pattern>/AddCartItem.jsp</url-pattern>
+     <url-pattern>/BuyProduct.jsp</url-pattern>
+     <url-pattern>/UpdateCartItem.jsp</url-pattern>
+     <url-pattern>/OrderDetail.jsp</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>adminLoginFilter</filter-name>
+    <filter-class>com.shop.filter.AdminLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>adminLoginFilter</filter-name>
+    <url-pattern>/AddCategory.jsp</url-pattern>
+    <url-pattern>/AddProduct.jsp</url-pattern>
+    <url-pattern>/Manage.jsp</url-pattern>
+     <url-pattern>/ManageOrderDetail.jsp</url-pattern>
+     <url-pattern>/ModifyCategory.jsp</url-pattern>
+     <url-pattern>/ModifyProduct.jsp</url-pattern>
+     <url-pattern>/UpdateCategory.jsp</url-pattern>
+     <url-pattern>/UpdateProduct.jsp</url-pattern>
   </filter-mapping>
 </web-app>

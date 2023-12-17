@@ -14,7 +14,7 @@ public interface OrderDao {
 	
 	public void updateOrder(Connection connection, int orderID, int status) throws SQLException;
 	
-	public void updateOrder(Connection connection, int orderID, int status, String address) throws SQLException;
+	public void updateOrder(Connection connection, int orderID, int status, String address, String name, String phone) throws SQLException;
 	
 	public Order searchOrder(Connection connection, int id) throws SQLException;
 	

@@ -27,6 +27,8 @@ public class CategoryServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String servletPath = request.getServletPath();
 		String methodName =  servletPath.substring(1, servletPath.length());
 		try {
@@ -56,13 +58,9 @@ public class CategoryServlet extends HttpServlet {
 	}
 	
 	public void ModifyCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		if (session.getAttribute("categories") != null) {
-			GetCategory(request, response);
-		}
+		response.setCharacterEncoding("UTF-8");
 		GetCategory(request, response);
 		response.sendRedirect(request.getContextPath()+"/ModifyCategory.jsp");
-
 	}
 	
 	public void DeleteCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -88,5 +86,6 @@ public class CategoryServlet extends HttpServlet {
 		CategoryService service = new CategoryService();
 		List<Category> categories = service.getCategoryList();
 		session.setAttribute("categories", categories);
+		System.out.println(categories.get(8).getCategoryName());
 	}
 }

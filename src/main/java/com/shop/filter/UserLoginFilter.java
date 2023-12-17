@@ -17,10 +17,10 @@ import javax.servlet.http.HttpSession;
 
 
 @WebFilter("/LoginFilter")
-public class LoginFilter extends HttpFilter implements Filter {
+public class UserLoginFilter extends HttpFilter implements Filter {
        
 
-    public LoginFilter() {
+    public UserLoginFilter() {
         super();
     }
 
@@ -33,7 +33,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 			chain.doFilter(request, response);
 		}
 		else {
-			((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath()+"/userlogin.jsp");
+			((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath()+"/UserLogin.jsp");
 		}
 	}
 

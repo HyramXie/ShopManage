@@ -31,6 +31,8 @@ public class ProductServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String servletPath = request.getServletPath();
 		String methodName =  servletPath.substring(1, servletPath.length());
 		try {
@@ -137,10 +139,9 @@ public class ProductServlet extends HttpServlet {
 		}
 		else {
 			HttpSession session =request.getSession();
-			int userid = ((User)session.getAttribute("user")).getUserID();
-			String address = ((User)session.getAttribute("user")).getAddress();
+			User user = (User)session.getAttribute("user");
 			double price = product.getPrice()*quantity;
-			Order order = new Order(userid, (new Date()).toString(), 0, price, address);
+			Order order = new Order(user.getUserID(), (new Date()).toString(), 0, price, user.getAddress(), user.getUsername(), user.getPhoneNumber());
 			Object object = orderService.addOrder(order);
 			int orderID = Integer.parseInt(object.toString());
 			OrderItem orderItem = new OrderItem(orderID, id, quantity);

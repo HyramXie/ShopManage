@@ -5,22 +5,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Order Detail</title>
-    <link rel="stylesheet" href="./css/Edit.css">
+    <link rel="stylesheet" href="./css/edit.css">
 </head>
 <body>
     <div class="container">
-        <h1>Order Detail</h1>
+        <h1>订单详情</h1>
         <form action="ChangeOrderStatus" method="post">
         	<input type="hidden" name="id" value="${requestScope.oneOrder.getOrderID()}">
-            <label for="name">Product:</label>
+            <label for="name">商品:</label>
             <c:forEach items="${requestScope.oneOrderItems}" var="orderItem" >
                   	<p>${orderItem.getProductName() }×${orderItem.getQuantity() }</p>
 	        </c:forEach>
-            <label for="price">Price:</label>
+            <label for="price">价格:</label>
             <p>${requestScope.oneOrder.getPrice()}</p><br>
-            <label for="date">OrderDate:</label>
+            <label for="date">订单日期:</label>
             <p>${requestScope.oneOrder.getOrderDate()}</p><br>
-            <label for="status">Status:</label>
+            <label for="status">状态:</label>
 	           <p>
 	            <c:choose>
 					<c:when test="${requestScope.oneOrder.getStatus() == 0}">
@@ -43,35 +43,43 @@
 					</c:otherwise>
 				</c:choose>
 			</p><br>
-			<label for="address">Address:</label>
 			<c:choose>
 				<c:when test="${requestScope.oneOrder.getStatus() == 0}">
+					<label for="name">收货人:</label>
+					<input type="text" id="name" name="name" value="${requestScope.oneOrder.getName()}">
+					<label for="phone">电话号码:</label>
+					<input type="text" id="phone" name="phone" value="${requestScope.oneOrder.getPhone()}">
+					<label for="address">地址:</label>
 					<input type="text" id="address" name="address" value="${requestScope.oneOrder.getAddress()}">
-					<c:if test="${requestScope.result}">You should write the Address</c:if>
 				</c:when>
 				<c:otherwise>
+					<label for="name">收货人:</label>
+					<p>${requestScope.oneOrder.getName()}</p>
+					<label for="phone">电话号码:</label>
+					<p>${requestScope.oneOrder.getPhone()}</p>
+					<label for="address">地址:</label>
 					<p>${requestScope.oneOrder.getAddress()}</p>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
 				<c:when test="${requestScope.oneOrder.getStatus() == 0}">
-					<input type="submit" value="Pay">
+					<input type="submit" value="支付">
 				</c:when>
 				<c:when test="${requestScope.oneOrder.getStatus() == 1}">
-					<input type="submit" value="Refund">
+					<input type="submit" value="退款">
 				</c:when>
 				<c:when test="${requestScope.oneOrder.getStatus() == 2}">
-					<input type="submit" name="action" value="Receive"><br>
-					<input type="submit" name="action" value="Refund">
+					<input type="submit" name="action" value="签收"><br>
+					<input type="submit" name="action" value="退款">
 				</c:when>
 				<c:when test="${requestScope.oneOrder.getStatus() == -1}">
-					<input type="submit" value="Cancel">
+					<input type="submit" value="取消">
 				</c:when>
 				<c:otherwise>
 				</c:otherwise>
 			</c:choose>
         </form>
-		<a class="back" href="${pageContext.request.contextPath}/MyOrder">Back</a>  
+        <a class="back" href="${pageContext.request.contextPath}/MyOrder">返回</a>
     </div>
 </body>
 </html>

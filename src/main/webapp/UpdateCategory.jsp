@@ -5,19 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Category</title>
-    <link rel="stylesheet" href="./css/Edit.css">
+    <link rel="stylesheet" href="./css/edit.css">
 
 </head>
 <body>
     <div class="container">
-        <h1>Update Category</h1>
+        <h1>更新商品类型</h1>
         <form action="UpdateCategory" method="post">
         	<input type="hidden" id="id" name="id" value="${param.id}">
-            <label for="name">Category:</label>
+            <label for="name">类型名称:</label>
             <input type="text" id="name" name="name" value="${param.name }"><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="提交">
         </form>
     </div>
-    <a class="back" href="${pageContext.request.contextPath}/ModifyCategory.jsp">Back</a>
+    <a class="back" href="${pageContext.request.contextPath}/ModifyCategory.jsp">返回</a>
 </body>
 </html>

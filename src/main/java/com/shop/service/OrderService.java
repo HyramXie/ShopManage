@@ -98,11 +98,11 @@ public class OrderService {
 		}
 	}
 	
-	public void updateOrder(int orderID, int status, String address){
+	public void updateOrder(int orderID, int status, String address, String name, String phone){
 		Connection connection = null;
 		try {
 			connection = JdbcTools.getConnection();
-			dao.updateOrder(connection, orderID, status, address);
+			dao.updateOrder(connection, orderID, status, address, name, phone);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

@@ -8,13 +8,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Manage</h1>
+        <h1>管理</h1>
         <div class="links">
-			<a href="${pageContext.request.contextPath}/AddCategory.jsp">Add Category</a>
-            <a href="${pageContext.request.contextPath}/GetSelect">Add Product</a>
-            <a href="${pageContext.request.contextPath}/ModifyCategory">Modify Category</a>
-            <a href="${pageContext.request.contextPath}/Product">Modify Product</a>
-            <a href="${pageContext.request.contextPath}/OrderDeal">Order Deal</a>
+			<a href="${pageContext.request.contextPath}/AddCategory.jsp">添加商品类型</a>
+            <a href="${pageContext.request.contextPath}/GetSelect">添加商品</a>
+            <a href="${pageContext.request.contextPath}/ModifyCategory">商品类型列表</a>
+            <a href="${pageContext.request.contextPath}/Product">商品列表</a>
+            <a href="${pageContext.request.contextPath}/OrderDeal">订单交易</a>
         </div>
     </div>
 </body>

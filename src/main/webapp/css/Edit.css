@@ -81,7 +81,7 @@ p{
 	text-align: center;
 }
 .back{
-			position: absolute;
+			position: fixed;
             bottom: 20px;
             left: 20px;
             padding: 10px 20px;

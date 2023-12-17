@@ -35,6 +35,8 @@ public class CartServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String servletPath = request.getServletPath();
 		String methodName =  servletPath.substring(1, servletPath.length());
 		try {
@@ -147,10 +149,9 @@ public class CartServlet extends HttpServlet {
 			}
 			price = price + quantity*product.getPrice();
 		}
-		int userid = ((User)session.getAttribute("user")).getUserID();
-		String address = ((User)session.getAttribute("user")).getAddress();
+		User user = (User)session.getAttribute("user");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Order order = new Order(userid, dateFormat.format(new Date()), 0, price, address);
+		Order order = new Order(user.getUserID(), dateFormat.format(new Date()), 0, price, user.getAddress(), user.getUsername(), user.getPhoneNumber());
 		Object object = orderService.addOrder(order);
 		int orderID = Integer.parseInt(object.toString());
 		for (int i = 0; i < ids.length; i++) {

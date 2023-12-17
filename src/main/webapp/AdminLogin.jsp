@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <link rel="stylesheet" href="./css/Login.css">
+    <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
     <div class="container">
-    	<h1>Admin Login</h1>
+    	<h1>管理员登录</h1>
         <form action="AdminLogin" method="post">
-            <label for="adminname">Username:</label>
+            <label for="adminname">管理员:</label>
             <input type="text" id="adminname" name="adminname"><br>
-            <label for="password">Password:</label>
+            <label for="password">密码:</label>
             <input type="password" id="password" name="password"><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="提交">
         </form>
     </div>
-    <a class="back" href="${pageContext.request.contextPath}/index.jsp">Back</a>
+    <a class="back" href="${pageContext.request.contextPath}/index.jsp">返回</a>
 </body>
 </html>

@@ -8,17 +8,21 @@ public class Order {
 	private int status;
 	private double price;
 	private String address;
+	private String name;
+	private String phone;
 	
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Order(int userID, String orderDate, int status, double price, String address) {
+	public Order(int userID, String orderDate, int status, double price, String address, String name, String phone) {
 		this.userID = userID;
 		this.orderDate = orderDate;
 		this.status = status;
 		this.price = price;
 		this.address = address;
+		this.name = name;
+		this.phone = phone;
 	}
 	
 	public int getOrderID() {
@@ -60,6 +64,22 @@ public class Order {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }

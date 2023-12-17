@@ -14,7 +14,7 @@ public class UserService {
 		this.dao = new UserDaoJdbcImpl();
 	}
 	
-	public User checkUser(User user){
+	public User searchUser(User user){
 		Connection connection = null;
 		User result = null;
 		try {
@@ -50,6 +50,20 @@ public class UserService {
 		}finally {
 			JdbcTools.releaseResource(null, connection);
 		}
+	}
+	
+	public User checkUser(User user){
+		Connection connection = null;
+		User result = null;
+		try {
+			connection = JdbcTools.getConnection();
+			result = dao.checkUser(connection, user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTools.releaseResource(null, connection);
+		}
+		return result;
 	}
 	
 }

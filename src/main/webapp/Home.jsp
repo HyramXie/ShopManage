@@ -8,12 +8,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Our Shop</h1>
+        <h1>欢迎</h1>
         <div class="links">
-            <a href="${pageContext.request.contextPath}/EditUser.jsp">Edit Information</a>
-            <a href="${pageContext.request.contextPath}/Product?shop=1">Shop Products</a>
-            <a href="${pageContext.request.contextPath}/ShopCart">Shop Cart</a>
-            <a href="${pageContext.request.contextPath}/MyOrder">Order</a>
+            <a href="${pageContext.request.contextPath}/EditUser.jsp">编辑信息</a>
+            <a href="${pageContext.request.contextPath}/Product?shop=1">商品列表</a>
+            <a href="${pageContext.request.contextPath}/ShopCart">购物车</a>
+            <a href="${pageContext.request.contextPath}/MyOrder">订单</a>
         </div>
     </div>
     

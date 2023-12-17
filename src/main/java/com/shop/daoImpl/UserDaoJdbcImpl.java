@@ -31,4 +31,10 @@ public class UserDaoJdbcImpl extends DaoJdbcImpl<User> implements UserDao{
 		Object[] objects = {user.getUsername(), user.getPassword()};
 		return fetch(connection, sql, objects);
 	}
+	@Override
+	public User checkUser(Connection connection, User user) throws SQLException {
+		String sql = "SELECT * FROM user WHERE Username = ?;";
+		Object[] objects = {user.getUsername()};
+		return fetch(connection, sql, objects);
+	}
 }

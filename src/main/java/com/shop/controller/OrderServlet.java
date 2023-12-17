@@ -31,6 +31,8 @@ public class OrderServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String servletPath = request.getServletPath();
 		String methodName =  servletPath.substring(1, servletPath.length());
 		try {
@@ -74,6 +76,7 @@ public class OrderServlet extends HttpServlet {
 			request.getRequestDispatcher("/OrderDetail.jsp").forward(request, response);
 	}
 	
+	//0是未付款 1是已付款 2是已发货 3是确认收货 -1是退款 -2是退款成功
 	public void ChangeOrderStatus(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -93,14 +96,16 @@ public class OrderServlet extends HttpServlet {
 				changeStatus = -1;
 		else {}
 		if (status == 0) {
+			String name = request.getParameter("name");
+			String phone = request.getParameter("phone");
 			String address = request.getParameter("address");
-			if (address == "") {
-				out.print("<script> alert('地址不能为空'); </script>");
+			if (address == "" || name == "" || phone == "") {
+				out.print("<script> alert('收获信息不能为空'); </script>");
 				out.print("<script> setTimeout(()=>{window.location.replace('http://localhost:8080/javawebshop/MyOrder')},10) </script>");
 				return;
 			}
 			else
-				service.updateOrder(orderID, changeStatus, address);
+				service.updateOrder(orderID, changeStatus, address, name, phone);
 		}
 		else 
 			service.updateOrder(orderID, changeStatus);

@@ -14,5 +14,7 @@ public interface UserDao {
 	public void updateUser(Connection connection, User user) throws SQLException;
 
 	public User searchUser(Connection connection, User user) throws SQLException;
+	
+	public User checkUser(Connection connection, User user) throws SQLException;
 
 }
