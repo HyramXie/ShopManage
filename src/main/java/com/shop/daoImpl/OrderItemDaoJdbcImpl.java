@@ -10,8 +10,8 @@ import com.shop.dao.OrderItemDao;
 public class OrderItemDaoJdbcImpl extends DaoJdbcImpl<OrderItem> implements OrderItemDao{
 	@Override
 	public void addOrderItem(Connection connection, OrderItem orderItem) throws SQLException {
-		String sql = "INSERT INTO `orderitem` (OrderID, ProductID, Quantity) VALUES (?, ?, ?);";
-		Object[] objects = {orderItem.getOrderID(), orderItem.getProductID(), orderItem.getQuantity()};
+		String sql = "INSERT INTO `orderitem` (OrderID, ProductID, ProductName, Quantity) VALUES (?, ?, ?, ?);";
+		Object[] objects = {orderItem.getOrderID(), orderItem.getProductID(), orderItem.getProductName(), orderItem.getQuantity()};
 		update(connection, sql, objects);
 	}
 
@@ -35,16 +35,13 @@ public class OrderItemDaoJdbcImpl extends DaoJdbcImpl<OrderItem> implements Orde
 
 	@Override
 	public List<OrderItem> fetchAllOrderItem(Connection connection, int id) throws SQLException {
-		String sql = "SELECT o.OrderID, o.OrderItemID, o.ProductID, o.Quantity, p.ProductName	\r\n"
-				+ "FROM orderitem o	JOIN product p ON o.ProductID = p.ProductID\r\n"
-				+ "WHERE o.OrderID = ?";
+		String sql = "SELECT OrderID, OrderItemID, ProductID, Quantity, ProductName	FROM orderitem WHERE OrderID = ?";
 		Object[] objects = {id};
 		return fetchList(connection, sql, objects);
 	}
 	
 	public List<OrderItem> fetchAllOrderItem(Connection connection) throws SQLException {
-		String sql = "SELECT o.OrderID, o.OrderItemID, o.ProductID, o.Quantity, p.ProductName	\r\n"
-				+ "FROM orderitem o	JOIN product p ON o.ProductID = p.ProductID;";
+		String sql = "SELECT OrderID, OrderItemID, ProductID, Quantity, ProductName FROM orderitem";
 		Object[] objects = {};
 		return fetchList(connection, sql, objects);
 	}

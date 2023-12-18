@@ -2,6 +2,7 @@ package com.shop.controller;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -141,10 +142,11 @@ public class ProductServlet extends HttpServlet {
 			HttpSession session =request.getSession();
 			User user = (User)session.getAttribute("user");
 			double price = product.getPrice()*quantity;
-			Order order = new Order(user.getUserID(), (new Date()).toString(), 0, price, user.getAddress(), user.getUsername(), user.getPhoneNumber());
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Order order = new Order(user.getUserID(), dateFormat.format(new Date()), 0, price, user.getAddress(), user.getUsername(), user.getPhoneNumber());
 			Object object = orderService.addOrder(order);
 			int orderID = Integer.parseInt(object.toString());
-			OrderItem orderItem = new OrderItem(orderID, id, quantity);
+			OrderItem orderItem = new OrderItem(orderID, id, product.getProductName(), quantity);
 			orderItemService.addOrderItem(orderItem);
 			productService.updateProduct(id, quantity);
 			GetProduct(request, response);

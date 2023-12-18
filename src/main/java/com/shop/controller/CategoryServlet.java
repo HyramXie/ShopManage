@@ -58,7 +58,6 @@ public class CategoryServlet extends HttpServlet {
 	}
 	
 	public void ModifyCategory(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		response.setCharacterEncoding("UTF-8");
 		GetCategory(request, response);
 		response.sendRedirect(request.getContextPath()+"/ModifyCategory.jsp");
 	}
@@ -86,6 +85,5 @@ public class CategoryServlet extends HttpServlet {
 		CategoryService service = new CategoryService();
 		List<Category> categories = service.getCategoryList();
 		session.setAttribute("categories", categories);
-		System.out.println(categories.get(8).getCategoryName());
 	}
 }

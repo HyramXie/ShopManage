@@ -11,9 +11,10 @@ public class OrderItem {
 		// TODO Auto-generated constructor stub
 	}
     
-	public OrderItem(int orderID, int productID, int quantity) {
+	public OrderItem(int orderID, int productID, String productName, int quantity) {
 		this.orderID = orderID;
 		this.productID = productID;
+		this.productName = productName;
 		this.quantity = quantity;
 	}
 	public int getOrderItemID() {

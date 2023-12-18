@@ -157,9 +157,10 @@ public class CartServlet extends HttpServlet {
 		for (int i = 0; i < ids.length; i++) {
 			int id = Integer.parseInt(ids[i]);
 			int pid = Integer.parseInt(pids[i]);
+			String productName =  productService.checkProduct(pid).getProductName();
 			int quantity = Integer.parseInt(quantitys[i]);
 			//insert
-			OrderItem orderItem = new OrderItem(orderID, pid, quantity);
+			OrderItem orderItem = new OrderItem(orderID, pid, productName, quantity);
 			orderItemService.addOrderItem(orderItem);
 			
 			//delete
